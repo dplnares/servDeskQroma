@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <title>Login Service Desk</title>
-  <link href="../css/styles.css" rel="stylesheet" />
-  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-</head>
 
 <body class="bg-secondary">
   <div id="layoutAuthentication">
@@ -26,11 +13,11 @@
                 <div class="card-body">
                   <form>
                     <div class="form-floating mb-3">
-                      <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                      <label for="inputEmail">Usuario</label>
+                      <input class="form-control" id="inputEmail" type="email" name="inputEmail" placeholder="correo@gmail.com" />
+                      <label for="inputEmail">Correo</label>
                     </div>
                     <div class="form-floating mb-3">
-                      <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                      <input class="form-control" id="inputPassword" type="password" name="inputPassword" placeholder="Password" />
                       <label for="inputPassword">Contraseña</label>
                     </div>
                     <div class="form-check mb-3">
@@ -44,22 +31,14 @@
                   </form>
                 </div>
                 <div class="card-footer text-center py-3">
-                  <div class="small"><a href="register.html">¿Necesitas una cuenta? Regístrate.</a></div>
+                  <div class="small"><a href="register">¿Necesitas una cuenta? Regístrate.</a></div>
                 </div>
               </div>
               <?php
                 $login = new ControllerUsuarios();
-                $login -> ctrIngresarUsuario();
+                $login -> ctrIniciarSesion();
               ?>
             </div>
           </div>
         </div>
       </main>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    crossorigin="anonymous"></script>
-  <script src="js/scripts.js"></script>
-</body>
-
-</html>

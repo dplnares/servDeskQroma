@@ -1,9 +1,9 @@
 <?php
 
-class ControlllerPlantilla
+class ControllerPlantilla
 {
   static public function ctrPlantilla()
   {
-    include "view/plantilla.php";
+    include "view/modules/plantilla.php";
   }
 }
