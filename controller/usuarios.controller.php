@@ -10,8 +10,9 @@ class ControllerUsuarios
       $passwordCrypt = crypt($_POST["inputPassword"], '$2a$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi');
       $email = $_POST["inputEmail"];
       $tabla = "tba_usuarios";
+      $parametro = "CorreoUsuario";
 
-      $datosUsuario = ModelUsuarios::mdlMostrarUsuarios($tabla, $email);
+      $datosUsuario = ModelUsuarios::mdlMostrarUnUsuario($tabla, $parametro, $email);
 
       if($datosUsuario["CorreoUsuario"] == $_POST["inputEmail"] && $datosUsuario["PasswordUsuario"] == $passwordCrypt)
       {
@@ -28,10 +29,10 @@ class ControllerUsuarios
         $ultimoLogin = $fecha.' '.$hora;
 
         $registrarLogin = ModelUsuarios::mdlActualizarUltimoLogin($tabla, $ultimoLogin, $datosUsuario["CodUsuario"]);
-        if ($ultimoLogin == "ok")
+        if ($registrarLogin == "ok")
         {
           echo '<script>
-            window.location = "home-user";
+            window.location = "home";
           </script>';
         }
       }
@@ -40,5 +41,13 @@ class ControllerUsuarios
         echo '<br><div class="alert alert-danger">Error en los datos ingresados, vuelve a intentarlo</div>';
       }
     }
+  }
+
+  //  Mostrar todos los usuarios actuales
+  static public function ctrMostrarUsuarios()
+  {
+    $tabla = "tba_usuarios";
+    $listaUsuarios = ModelUsuarios::mdlMostrarUsuario($tabla);
+    return $listaUsuarios;
   }
 }

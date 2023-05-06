@@ -1,11 +1,11 @@
 <?php 
 
 //  Controllers
-require "controller/plantilla.controller.php";
-require "controller/usuarios.controller.php";
+require_once "controller/plantilla.controller.php";
+require_once "controller/usuarios.controller.php";
 
 //  Models
-require "model/usuarios.model.php";
+require_once "model/usuarios.model.php";
 
 $plantilla = new ControllerPlantilla();
 $plantilla -> ctrPlantilla();
