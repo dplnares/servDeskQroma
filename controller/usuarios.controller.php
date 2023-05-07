@@ -47,7 +47,125 @@ class ControllerUsuarios
   static public function ctrMostrarUsuarios()
   {
     $tabla = "tba_usuarios";
-    $listaUsuarios = ModelUsuarios::mdlMostrarUsuario($tabla);
+    $listaUsuarios = ModelUsuarios::mdlMostrarUsuarios($tabla);
     return $listaUsuarios;
   }
+
+  //  Agregar un nuevo usuario
+  static public function ctrCrearUsuario()
+  {
+    if(isset($_POST["nombreUsuario"]))
+    {
+      $tabla = "tba_usuarios";
+      $passwordCrypt = crypt($_POST["passwordUsuario"], '$2a$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi');
+      $datosCreate = array(
+        "NombreUsuario" => $_POST["nombreUsuario"],
+        "CorreoUsuario" => $_POST["correoUsuario"],
+        "PasswordUsuario" => $passwordCrypt,
+        "CodPerfil" => $_POST["perfilUsuario"],
+        "CodArea" => $_POST["areaUsuario"],
+      );
+
+      $respuesta = ModelUsuarios::mdlIngresarUsuario($tabla, $datosCreate);
+      if($respuesta == "ok")
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "success",
+            title: "Correcto",
+            text: "¡Usuario ingresado Correctamente!",
+          }).then(function(result){
+						if(result.value){
+							window.location = "usuarios";
+						}
+					});
+        </script>';
+      }	
+    }
+  }
+
+  //  Mostrar los perfiles de los usuarios
+  static public function ctrMostrarPerfiles()
+  {
+    $tabla = "tba_perfilusuario";
+    $listaPerfiles = ModelUsuarios::mdlMostrarPerfiles($tabla);
+    return $listaPerfiles;
+  }
+
+  //  Mostrar las areas de los usuario
+  static public function ctrMostrarAreas()
+  {
+    $tabla = "tba_areausuario";
+    $listaPerfiles = ModelUsuarios::mdlMostrarAreas($tabla);
+    return $listaPerfiles;
+  }
+
+  //  Mostrar datos de un usuario para editar
+  static public function ctrMostrarDatosEditar($codUsuario)
+  {
+    $tabla = "tba_usuarios";
+    $datosUsuario = ModelUsuarios::mdlMostrarDatosEditar($tabla, $codUsuario);
+    return $datosUsuario;
+  }
+
+  //  Editar Usuario
+  static public function ctrEditarUsuario()
+  {
+    if(isset($_POST["editarNombre"]))
+    {
+      $tabla = "tba_usuarios";
+      $datosUpdate = array(
+        "NombreUsuario" =>  $_POST["editarNombre"],
+        "CorreoUsuario" => $_POST["editarCorreo"],
+        "CodPerfil" => $_POST["editarPerfil"],
+        "CodArea" => $_POST["editarArea"],
+        "CodUsuario" => $_POST["codUsuario"],
+      );
+
+      $respuesta = ModelUsuarios::mdlUpdateUsuario($tabla, $datosUpdate);
+      if($respuesta == "ok")
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "success",
+            title: "Correcto",
+            text: "¡Usuario editado Correctamente!",
+          }).then(function(result){
+						if(result.value){
+							window.location = "usuarios";
+						}
+					});
+        </script>';
+      }
+    }
+  }
+
+  //  Eliminar usuario
+  public static function ctrBorrarUsuario()
+  {
+    if (isset($_GET["codUsuario"]))
+    {
+      $tabla = "tba_usuarios";
+      $codUsuario = $_GET["codUsuario"];
+      $respuesta = ModelUsuarios::mdlEliminarUsuario($tabla, $codUsuario);
+      if($respuesta == "ok")
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "success",
+            title: "Correcto",
+            text: "¡Usuario editado Correctamente!",
+          }).then(function(result){
+						if(result.value){
+							window.location = "usuarios";
+						}
+					});
+        </script>';
+      }
+    }
+  }
+
 }

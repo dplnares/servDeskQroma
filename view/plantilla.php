@@ -8,10 +8,12 @@ session_start();
   <?php require "modules/header.php" ?>
 </head>
 
-<body class="sb-nav-fixed">
+
   <?php
     if (isset($_SESSION["login"]) && $_SESSION["login"] == "ok")
     {
+      echo '<body class="sb-nav-fixed">';
+      
       include "modules/navbar.php";
 
       echo '
@@ -60,6 +62,7 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
   <script src="js/datatables-simple-demo.js"></script>
 
-  <script src="view/js/plantilla.js"></script>
+  <script src="js/plantilla.js"></script>
+  <script src="js/usuarios.js"></script>
 </body>
 </html>
