@@ -21,6 +21,7 @@ class ControllerUsuarios
         $_SESSION["perfilUsuario"] = $datosUsuario["CodPerfil"];
         $_SESSION["areaUsuario"] = $datosUsuario["AreaUsuario"];
         $_SESSION["nombreUsuario"] = $datosUsuario["NombreUsuario"];
+        $_SESSION["codUsuario"] = $datosUsuario["CodUsuario"];
         
         //  Registramos la fecha para el último login
         date_default_timezone_set('America/Bogota');
@@ -106,6 +107,13 @@ class ControllerUsuarios
   {
     $tabla = "tba_usuarios";
     $datosUsuario = ModelUsuarios::mdlMostrarDatosEditar($tabla, $codUsuario);
+    return $datosUsuario;
+  }
+
+  public static function ctrMostrarDatosCompletos($codUsuario)
+  {
+    $tabla = "tba_usuarios";
+    $datosUsuario = ModelUsuarios::mdlMostrarTodosLosDatos($tabla, $codUsuario);
     return $datosUsuario;
   }
 

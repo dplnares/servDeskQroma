@@ -79,6 +79,14 @@ class ModelUsuarios
     return $statement -> fetch();
   }
 
+  //  Mostrar todos los datos de un usuario para editar perfil completamente
+  static public function mdlMostrarTodosLosDatos($tabla, $codUsuario)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_usuarios.CodUsuario, tba_usuarios.NombreUsuario, tba_usuariosApellidoUsuario, tba_usuarios.CelularUsuario, tba_usuarios.SedeUsuario, tba_usuarios.CodArea, tba_usuarios.CorreoUsuario, tba_usuarios.CodPerfil, tba_areausuario.NombreArea FROM $tabla INNER JOIN tba_areausuario ON tba_usuarios.CodArea = tba_areausuario.CodArea WHERE tba_usuarios.CodUsuario = $codUsuario");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
   //  Editar datos de un usuario
   public static function mdlUpdateUsuario($tabla, $datosUpdate)
   {

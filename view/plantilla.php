@@ -29,6 +29,7 @@ session_start();
         if(
           $_GET["ruta"] == "home" ||  
           $_GET["ruta"] == "usuarios" ||
+          $_GET["ruta"] == "perfil" ||
           $_GET["ruta"] == "signout" 
         )
         {
