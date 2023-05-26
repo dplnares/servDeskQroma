@@ -9,9 +9,9 @@ El archivo "php_xdebug-3.1.6-7.3-vc15-x86_64.dll" debe estar en la siguiente rut
 
 Se debe colocar la siguiente configuración en el archivo "php.ini", el archivo se encuentra en 'C:\xampp\php'
 
-  zend_extension=php_xdebug.dll
-  xdebug.mode = debug
-  xdebug.start_with_request = yes
+  - zend_extension=php_xdebug.dll
+  - xdebug.mode = debug
+  - xdebug.start_with_request = yes
 
 
 # CLONAR EL REPOSITORIO
