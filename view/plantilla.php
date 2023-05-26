@@ -29,6 +29,7 @@ session_start();
         if(
           $_GET["ruta"] == "home" ||  
           $_GET["ruta"] == "usuarios" ||
+          $_GET["ruta"] == "tickets" ||
           $_GET["ruta"] == "perfil" ||
           $_GET["ruta"] == "signout" 
         )
@@ -65,5 +66,6 @@ session_start();
 
   <script src="js/plantilla.js"></script>
   <script src="js/usuarios.js"></script>
+  <script src="js/tickets.js"></script>
 </body>
 </html>

@@ -12,7 +12,16 @@
   Administrar Usuarios
 </a>
 <!-- Home de cada usuario -->
-<div class="sb-sidenav-menu-heading">Interface</div>
+<div class="sb-sidenav-menu-heading">Tickets</div>
+<a class="nav-link" href="tickets">
+  <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+  Tickets
+</a>
+<a class="nav-link" href="asignaciones">
+  <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+  Asignaciones
+</a>
+<!-- <div class="sb-sidenav-menu-heading">Tickets</div>
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
   <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
   Layouts
@@ -23,7 +32,7 @@
     <a class="nav-link" href="layout-static.html">Static Navigation</a>
     <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
   </nav>
-</div>
+
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
   <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
   Pages
@@ -64,3 +73,4 @@
   <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
   Tables
 </a>
+</div> -->
