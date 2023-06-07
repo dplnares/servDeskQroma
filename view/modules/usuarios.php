@@ -23,7 +23,7 @@
               Todos los Usuarios
             </div>
             <div class="card-body">
-              <table id="datatablesSimple" class="data-table-Usuario table">
+              <table id="datatablesSimple" class="data-table-Ticket table">
                 <thead>
                   <tr>
                     <th>#</th>
