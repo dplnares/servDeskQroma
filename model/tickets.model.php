@@ -63,4 +63,25 @@ class ModelTickets
     $statement -> execute();
     return $statement -> fetchAll();
   }
+
+  //  Eliminar un ticket
+  static public function mdlEliminarTicket($tabla, $codTicket)
+  {
+    $statement = Conexion::conn()->prepare("DELETE FROM $tabla WHERE CodTicket = $codTicket");
+    if ($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
+
+  static public function mdlMostrarDatosTicket($tabla, $codTicket)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.TituloTicket, tba_ticket.CodCategoria, tba_categoria.NombreCategoria,  tba_detalleticket.DescripcionTicket FROM $tabla INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria LEFT JOIN tba_detalleticket ON tba_ticket.CodTicket = tba_detalleticket.CodTicket WHERE tba_ticket.CodTicket = $codTicket");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

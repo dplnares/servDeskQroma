@@ -165,7 +165,7 @@ class ControllerUsuarios
           Swal.fire({
             icon: "success",
             title: "Correcto",
-            text: "¡Usuario editado Correctamente!",
+            text: "¡Usuario eliminado Correctamente!",
           }).then(function(result){
 						if(result.value){
 							window.location = "usuarios";

@@ -98,4 +98,44 @@ class ControllerTickets
     $codigoTicket = ModelTickets::mdlObtenerUltimoTicket($tabla);
     return $codigoTicket;
   }
+
+  //  Eliminar ticket
+  static public function ctrEliminarTicket()
+  {
+    if (isset($_GET["codTicket"]))
+    {
+      $tabla = "tba_ticket";
+      $codTicket = $_GET["codTicket"];
+      $respuesta = ModelTickets::mdlEliminarTicket($tabla, $codTicket);
+      if($respuesta == "ok")
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "success",
+            title: "Correcto",
+            text: "Ticket eliminado Correctamente!",
+          }).then(function(result){
+						if(result.value){
+							window.location = "tickets";
+						}
+					});
+        </script>';
+      }
+    }
+  }
+
+  //  Mostrar los datos de un solo ticket para editarlo
+  static public function ctrMostrarDatosTicket($codTicket)
+  {
+    $tabla = "tba_ticket";
+    $datosTicket = ModelTickets::mdlMostrarDatosTicket($tabla, $codTicket);
+    return $datosTicket;
+  }
+
+  //  Editar los datos de un ticket 
+  static public function ctrEditarTicket()
+  {
+    
+  }
 }

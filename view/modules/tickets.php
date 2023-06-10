@@ -141,7 +141,7 @@ Modal Editar Ticket
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5">Ingresar nuevo Ticket</h1>
+        <h1 class="modal-title fs-5">Editar Ticket</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form role="form" method="post">
@@ -150,23 +150,23 @@ Modal Editar Ticket
 
             <!-- Titulo -->
             <div class="form-group">
-              <label for="tituloTicket" class="col-form-label">Titulo:</label>
-              <input type="text" class="form-control" id="tituloTicket" name="tituloTicket">
+              <label for="editarTitulo" class="col-form-label">Titulo:</label>
+              <input type="text" class="form-control" id="editarTitulo" name="editarTitulo">
             </div>
 
             <!-- Nombre Solicitante -->
             <div class="form-group">
-              <label for="solicitanteTicket" class="col-form-label">Nombre Solicitante:</label>
+              <label for="editarSolicitante" class="col-form-label">Nombre Solicitante:</label>
               <?php
                 $NombreUsuario = $_SESSION["nombreUsuario"];
-                echo '<input type="text" class="form-control" id="solicitanteTicket" name="solicitanteTicket" value='.$NombreUsuario.' readonly>';
+                echo '<input type="text" class="form-control" id="editarSolicitante" name="editarSolicitante" value='.$NombreUsuario.' readonly>';
               ?>
             </div>
 
             <!-- Categoria -->
             <div class="form-group">
-            <label for="categoriaTicket" class="col-form-label">Perfil:</label>
-              <select class="form-control" name="categoriaTicket">
+            <label for="editarCategoria" class="col-form-label">Perfil:</label>
+              <select class="form-control" name="editarCategoria">
               <?php
                 $categorias = ControllerCategorias::ctrMostrarCategorias();
                 foreach ($categorias as $key => $value)
@@ -179,20 +179,25 @@ Modal Editar Ticket
 
             <!-- Descripción -->
             <div class="form-group">
-              <label for="descripcionTicket" class="col-form-label">Descripción:</label>
-              <input type="text" class="form-control" id="descripcionTicket" name="descripcionTicket">
+              <label for="editarDescripcion" class="col-form-label">Descripción:</label>
+              <input type="text" class="form-control" id="editarDescripcion" name="editarDescripcion">
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Generar Ticket</button>
+          <button type="submit" class="btn btn-primary">Editar Ticket</button>
         </div>
         <?php
-          $crearTicket = new ControllerTickets();
-          $crearTicket -> ctrCrearNuevoTicket();
+          $editarTicket = new ControllerTickets();
+          $editarTicket -> ctrEditarTicket();
         ?>
       </form>
     </div>
   </div>
 </div>
+
+<?php
+  $eliminarTicket = new ControllerTickets();
+  $eliminarTicket -> ctrEliminarTicket();
+?>
