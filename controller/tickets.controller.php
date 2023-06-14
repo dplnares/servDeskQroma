@@ -13,6 +13,8 @@ class ControllerTickets
         "TituloTicket" => $_POST["tituloTicket"],
         "CodCategoria" => $_POST["categoriaTicket"],
         "CodEstado" => "1",
+        "FechaCreacion"=>date("Y-m-d"),
+        "FechaActualizacion"=>date("Y-m-d"),
       );
       
       $respuestaCabecera = ModelTickets::mdlIngresarCabeceraTicket($tablaCabecera, $datosCabecera);
@@ -24,6 +26,8 @@ class ControllerTickets
         $datosDetalle = array(
           "DescripcionTicket" => $_POST["descripcionTicket"],
           "CodTicket" => $CodTicket["CodTicket"],
+          "FechaCreacion"=>date("Y-m-d"),
+          "FechaActualizacion"=>date("Y-m-d"),
         );
 
         $respuestaDetalle = ModelTickets::mdlIngresarDetalleTicket($tablaDetalle, $datosDetalle);
@@ -136,6 +140,72 @@ class ControllerTickets
   //  Editar los datos de un ticket 
   static public function ctrEditarTicket()
   {
-    
+    if(isset($_POST["editarTitulo"]))
+    {
+      $tabla = "tba_ticket";
+      $datosUpdate = array(
+        "TituloTicket" => $_POST["editarTitulo"],
+        "CodCategoria" => $_POST["editarCategoria"],
+        "CodTicket" => $_POST["codTicket"],
+        "FechaActualizacion"=>date("Y-m-d"),
+      );
+
+      $respuestaCabecera = ModelTickets::mdlUpdateTicket($tabla, $datosUpdate);
+      if ($respuestaCabecera == "ok")
+      {
+        $tabla = "tba_detalleticket";
+        $datosUpdate = array(
+          "CodTicket" => $_POST["codTicket"],
+          "DescripcionTicket" => $_POST["editarDescripcion"],
+          "FechaActualizacion"=>date("Y-m-d"),
+        );
+        $respuestaDetalle = ModelTickets::mdlUpdateDetalleTicket($tabla, $datosUpdate);
+        if($respuestaDetalle == "ok")
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "success",
+              title: "Correcto",
+              text: "Ticket editado Correctamente!",
+            }).then(function(result){
+              if(result.value){
+                window.location = "tickets";
+              }
+            });
+          </script>';
+        }
+        else
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Error al editar el detalle!",
+            }).then(function(result){
+              if(result.value){
+                window.location = "tickets";
+              }
+            });
+          </script>';
+        }
+      }
+      else
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Error al editar la cabecera!",
+          }).then(function(result){
+						if(result.value){
+							window.location = "tickets";
+						}
+					});
+        </script>';
+      }
+    }
   }
 }

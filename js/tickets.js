@@ -15,9 +15,10 @@ $(".table").on("click", ".btnEditarTicket", function () {
 
     //  Ver la forma de pasar el nombre del perfil y del área a una opción del select
     success: function (respuesta) {
-      $("#editarTitulo").val(respuesta["editarTitulo"]);
-      $("#editarCategoria").val(respuesta["editarCategoria"]);
-      $("#editarDescripcion").val(respuesta["editarDescripcion"]);
+      $("#editarTitulo").val(respuesta["TituloTicket"]);
+      $("#editarCategoria").val(respuesta["NombreCategoria"]);
+      $("#editarDescripcion").val(respuesta["DescripcionTicket"]);
+      $("#codTicket").val(respuesta["CodTicket"]);
     }
   });
 });

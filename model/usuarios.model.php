@@ -54,12 +54,14 @@ class ModelUsuarios
   //  Ingresar un nuevo usuario
   static public function mdlIngresarUsuario($tabla, $datosCreate)
   {
-    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (NombreUsuario, CorreoUsuario, PasswordUsuario, CodPerfil, CodArea) VALUES(:NombreUsuario, :CorreoUsuario, :PasswordUsuario, :CodPerfil, :CodArea)");
+    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (NombreUsuario, CorreoUsuario, PasswordUsuario, CodPerfil, CodArea, FechaCreacion, FechaActualizacion) VALUES(:NombreUsuario, :CorreoUsuario, :PasswordUsuario, :CodPerfil, :CodArea, :FechaCreacion, :FechaActualizacion)");
     $statement -> bindParam(":NombreUsuario", $datosCreate["NombreUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":CorreoUsuario", $datosCreate["CorreoUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":PasswordUsuario", $datosCreate["PasswordUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":CodPerfil", $datosCreate["CodPerfil"], PDO::PARAM_STR);
     $statement -> bindParam(":CodArea", $datosCreate["CodArea"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaCreacion", $datosCreate["FechaCreacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosCreate["FechaActualizacion"], PDO::PARAM_STR);
 
     if($statement -> execute())
     {
@@ -90,19 +92,20 @@ class ModelUsuarios
   //  Editar datos de un usuario
   public static function mdlUpdateUsuario($tabla, $datosUpdate)
   {
-    $statement = Conexion::conn()->prepare("UPDATE $tabla SET NombreUsuario=:NombreUsuario, CorreoUsuario=:CorreoUsuario, CodArea=:CodArea, CodPerfil=:CodPerfil WHERE CodUsuario=:CodUsuario");
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET NombreUsuario=:NombreUsuario, CorreoUsuario=:CorreoUsuario, CodArea=:CodArea, CodPerfil=:CodPerfil, FechaActualizacion=:FechaActualizacion WHERE CodUsuario=:CodUsuario");
     $statement -> bindParam(":NombreUsuario", $datosUpdate["NombreUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":CorreoUsuario", $datosUpdate["CorreoUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":CodArea", $datosUpdate["CodArea"], PDO::PARAM_STR);
     $statement -> bindParam(":CodPerfil", $datosUpdate["CodPerfil"], PDO::PARAM_STR);
     $statement -> bindParam(":CodUsuario", $datosUpdate["CodUsuario"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosUpdate["FechaActualizacion"], PDO::PARAM_STR);
     if($statement -> execute())
     {
       return "ok";
     }
     else
     {
-      return "erro";
+      return "error";
     }
   }
 

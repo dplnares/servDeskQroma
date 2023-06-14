@@ -65,6 +65,8 @@ class ControllerUsuarios
         "PasswordUsuario" => $passwordCrypt,
         "CodPerfil" => $_POST["perfilUsuario"],
         "CodArea" => $_POST["areaUsuario"],
+        "FechaCreacion"=>date("Y-m-d"),
+        "FechaActualizacion"=>date("Y-m-d"),
       );
 
       $respuesta = ModelUsuarios::mdlIngresarUsuario($tabla, $datosCreate);
@@ -129,6 +131,7 @@ class ControllerUsuarios
         "CodPerfil" => $_POST["editarPerfil"],
         "CodArea" => $_POST["editarArea"],
         "CodUsuario" => $_POST["codUsuario"],
+        "FechaActualizacion"=>date("Y-m-d"),
       );
 
       $respuesta = ModelUsuarios::mdlUpdateUsuario($tabla, $datosUpdate);
@@ -140,6 +143,21 @@ class ControllerUsuarios
             icon: "success",
             title: "Correcto",
             text: "¡Usuario editado Correctamente!",
+          }).then(function(result){
+						if(result.value){
+							window.location = "usuarios";
+						}
+					});
+        </script>';
+      }
+      else
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Error al editar usuario!",
           }).then(function(result){
 						if(result.value){
 							window.location = "usuarios";

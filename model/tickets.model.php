@@ -7,11 +7,13 @@ class ModelTickets
   //  Ingresar Cabecera del detalle
   static public function mdlIngresarCabeceraTicket($tabla, $datosCabecera)
   {
-    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (TituloTicket, CodUsuario, CodCategoria, CodEstado) VALUES(:TituloTicket, :CodUsuario, :CodCategoria, :CodEstado)");
+    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (TituloTicket, CodUsuario, CodCategoria, CodEstado, FechaCreacion, FechaActualizacion) VALUES(:TituloTicket, :CodUsuario, :CodCategoria, :CodEstado, :FechaCreacion, :FechaActualizacion)");
     $statement -> bindParam(":TituloTicket", $datosCabecera["TituloTicket"], PDO::PARAM_STR);
     $statement -> bindParam(":CodUsuario", $datosCabecera["CodUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":CodCategoria", $datosCabecera["CodCategoria"], PDO::PARAM_STR);
     $statement -> bindParam(":CodEstado", $datosCabecera["CodEstado"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaCreacion", $datosCabecera["FechaCreacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosCabecera["FechaActualizacion"], PDO::PARAM_STR);
 
     if($statement -> execute())
     {
@@ -29,6 +31,8 @@ class ModelTickets
     $statement = Conexion::conn()->prepare("INSERT INTO $tabla (CodTicket, DescripcionTicket) VALUES(:CodTicket, :DescripcionTicket)");
     $statement -> bindParam(":CodTicket", $datosDetalle["CodTicket"], PDO::PARAM_STR);
     $statement -> bindParam(":DescripcionTicket", $datosDetalle["DescripcionTicket"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaCreacion", $datosDetalle["FechaCreacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosDetalle["FechaActualizacion"], PDO::PARAM_STR);
 
     if($statement -> execute())
     {
@@ -78,10 +82,46 @@ class ModelTickets
     }
   }
 
+  //  Mostrar los datos del ticket ajax
   static public function mdlMostrarDatosTicket($tabla, $codTicket)
   {
     $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.TituloTicket, tba_ticket.CodCategoria, tba_categoria.NombreCategoria,  tba_detalleticket.DescripcionTicket FROM $tabla INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria LEFT JOIN tba_detalleticket ON tba_ticket.CodTicket = tba_detalleticket.CodTicket WHERE tba_ticket.CodTicket = $codTicket");
     $statement -> execute();
     return $statement -> fetch();
+  }
+
+  //  Update de la cabecera del ticket
+  static public function mdlUpdateTicket($tabla, $datosUpdate)
+  {
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET TituloTicket=:TituloTicket, CodCategoria=:CodCategoria, FechaActualizacion=:FechaActualizacion WHERE CodTicket=:CodTicket");
+    $statement -> bindParam(":TituloTicket", $datosUpdate["TituloTicket"], PDO::PARAM_STR);
+    $statement -> bindParam(":CodCategoria", $datosUpdate["CodCategoria"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosUpdate["FechaActualizacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":CodTicket", $datosUpdate["CodTicket"], PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
+
+  //  Update del detalle del ticket
+  static public function mdlUpdateDetalleTicket($tabla, $datosUpdate)
+  {
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET DescripcionTicket=:DescripcionTicket, FechaActualizacion=:FechaActualizacion WHERE CodTicket=:CodTicket");
+    $statement -> bindParam(":DescripcionTicket", $datosUpdate["DescripcionTicket"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosUpdate["FechaActualizacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":CodTicket", $datosUpdate["CodTicket"], PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
   }
 }
