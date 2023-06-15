@@ -122,5 +122,13 @@ class ModelUsuarios
       return "error";
     }
   }
+
+  //  Mostrar los usuarios por un perfil en específico
+  public static function mdlMostrarUsuariosPorPerfil($tabla, $codPerfil)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_usuarios.CodUsuario, tba_usuarios.NombreUsuario, tba_usuarios.ApellidoUsuario FROM tba_usuarios WHERE tba_usuarios.Codperfil = $codPerfil");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
   
 }

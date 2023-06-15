@@ -63,7 +63,7 @@ class ModelTickets
   //  Mostrar todos los tickets creados
   static public function mdlMostrarTodoslosTickets($tabla)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.CodEstado, tba_ticket.CodAsignacion, tba_ticket.CodCategoria, tba_ticket.CodUsuario, tba_ticket.TituloTicket, tba_usuarios.NombreUsuario, tba_categoria.NombreCategoria, tba_estado.NombreEstado FROM $tabla INNER JOIN tba_usuarios ON tba_ticket.CodUsuario = tba_usuarios.CodUsuario INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria INNER JOIN tba_estado ON tba_ticket.CodEstado = tba_estado.CodEstado");
+    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.CodEstado, tba_ticket.CodAsignacion, tba_ticket.CodCategoria, tba_ticket.CodUsuario, tba_ticket.TituloTicket, tba_ticket.FechaCreacion, tba_usuarios.NombreUsuario, tba_categoria.NombreCategoria, tba_estado.NombreEstado FROM $tabla INNER JOIN tba_usuarios ON tba_ticket.CodUsuario = tba_usuarios.CodUsuario INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria INNER JOIN tba_estado ON tba_ticket.CodEstado = tba_estado.CodEstado");
     $statement -> execute();
     return $statement -> fetchAll();
   }
@@ -113,6 +113,40 @@ class ModelTickets
   {
     $statement = Conexion::conn()->prepare("UPDATE $tabla SET DescripcionTicket=:DescripcionTicket, FechaActualizacion=:FechaActualizacion WHERE CodTicket=:CodTicket");
     $statement -> bindParam(":DescripcionTicket", $datosUpdate["DescripcionTicket"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosUpdate["FechaActualizacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":CodTicket", $datosUpdate["CodTicket"], PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
+
+  //  Asignar Usuario a ticket
+  static public function mdlAsignarTicket($tabla, $datosUpdate)
+  {
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET CodAsignacion=:CodAsignacion, FechaActualizacion=:FechaActualizacion WHERE CodTicket=:CodTicket");
+    $statement -> bindParam(":CodAsignacion", $datosUpdate["CodAsignacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosUpdate["FechaActualizacion"], PDO::PARAM_STR);
+    $statement -> bindParam(":CodTicket", $datosUpdate["CodTicket"], PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
+
+  //  Cambiar estado del ticket 
+  static public function mdlUpdateEstado($tabla, $datosUpdate)
+  {
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET CodEstado=:CodEstado, FechaActualizacion=:FechaActualizacion WHERE CodTicket=:CodTicket");
+    $statement -> bindParam(":CodEstado", $datosUpdate["CodEstado"], PDO::PARAM_STR);
     $statement -> bindParam(":FechaActualizacion", $datosUpdate["FechaActualizacion"], PDO::PARAM_STR);
     $statement -> bindParam(":CodTicket", $datosUpdate["CodTicket"], PDO::PARAM_STR);
     if($statement -> execute())

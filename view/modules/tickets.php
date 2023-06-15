@@ -39,7 +39,7 @@
                     <th>Estado</th>
                     <!-- CONSIDERAR PONER EL AREA SOLO EN EL CASO QUE SEA PARA MOSTRAR A LOS USUARIOS DE TIPO ADMI O AYUDANTES,  ESTE MISMO DEBERÍA ESTAR EN LA TABLA POR SI SE QUIERE <th>Área</th> -->
                     <th>Categoría</th>
-                    <!-- <th>Fecha de Solicitud</th> -->
+                    <th>Fecha de Solicitud</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -55,6 +55,7 @@
                           <td>'.$value["NombreUsuario"].'</td>
                           <td>'.$value["NombreEstado"].'</td>
                           <td>'.$value["NombreCategoria"].'</td>
+                          <td>'.$value["FechaCreacion"].'</td>
                           <td>
                             <button class="btn btn-warning btnEditarTicket" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalEditTicket">Editar <i class="fa-solid fa-pencil"></i></button>
                             <button class="btn btn-danger btnEliminarTicket" codTicket="'.$value["CodTicket"].'">Eliminar <i class="fa-solid fa-trash"></i></button>

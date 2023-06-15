@@ -31,6 +31,7 @@ session_start();
           $_GET["ruta"] == "usuarios" ||
           $_GET["ruta"] == "tickets" ||
           $_GET["ruta"] == "perfil" ||
+          $_GET["ruta"] == "asignaciones" ||
           $_GET["ruta"] == "signout" 
         )
         {

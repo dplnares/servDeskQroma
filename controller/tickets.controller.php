@@ -84,6 +84,7 @@ class ControllerTickets
   static public function ctrMostrarTickets($perfilUsuario, $codUsuario)
   {
     $tabla = "tba_ticket";
+    //  Perfil Solicitante, solo le muestra sus tickets creados por el, por otro lado muestra todos
     if ($perfilUsuario == "2")
     {
       $listaTickets = ModelTickets::mdlMostrarTicketsUsuarios($tabla, $codUsuario);
@@ -207,5 +208,83 @@ class ControllerTickets
         </script>';
       }
     }
+  }
+
+  //  Asignar Asistente al ticket
+  static public function ctrAsignarTicket()
+  {
+    if(isset($_POST["asignarAsistente"]))
+    {
+      $tabla = "tba_ticket";
+      $datosUpdate = array(
+        "CodTicket" => $_POST["codTicket"],
+        "CodAsignacion" => $_POST["asignarAsistente"],
+        "FechaActualizacion"=>date("Y-m-d"),
+      );
+
+      $respuestaAsignacion = ModelTickets::mdlAsignarTicket($tabla, $datosUpdate);
+      if ($respuestaAsignacion == "ok")
+      {
+        $respuestaCambioEstado = self::ctrCambiarEstado($_POST["codTicket"], "2");
+        if($respuestaCambioEstado == "ok")
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "success",
+              title: "Correcto",
+              text: "Ticket asignado Correctamente!",
+            }).then(function(result){
+              if(result.value){
+                window.location = "asignaciones";
+              }
+            });
+          </script>';
+        }
+        else
+        {
+          echo '
+          <script>
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Error al cambiar el estado!",
+            }).then(function(result){
+              if(result.value){
+                window.location = "asignaciones";
+              }
+            });
+          </script>';
+        }
+      }
+      else
+      {
+        echo '
+        <script>
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Error al asignar el ticket!",
+          }).then(function(result){
+						if(result.value){
+							window.location = "asignaciones";
+						}
+					});
+        </script>';
+      }
+    }
+  }
+
+  //  Cambiar estado de ticket
+  static public function ctrCambiarEstado($codTicket, $codEstado)
+  {
+    $tabla = "tba_ticket";
+    $datosUpdate = array(
+      "CodTicket" => $codTicket,
+      "CodEstado" => $codEstado,
+      "FechaActualizacion"=>date("Y-m-d"),
+    );
+    $respuesta = ModelTickets::mdlUpdateEstado($tabla, $datosUpdate);
+    return $respuesta;
   }
 }

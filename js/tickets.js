@@ -42,3 +42,28 @@ $(".table").on("click", ".btnEliminarTicket", function () {
     }
   });
 });
+
+//  Mostrar los datos en el modal para poder asignar un ticket
+$(".table").on("click", ".btnAsignarTicket", function () {
+  var codTicket = $(this).attr("codTicket");
+  var datos = new FormData();
+
+  datos.append("codTicket", codTicket);
+  $.ajax({
+    url: "ajax/tickets.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+
+    //  Ver la forma de pasar el nombre del perfil y del área a una opción del select
+    success: function (respuesta) {
+      $("#asignarTitulo").val(respuesta["TituloTicket"]);
+      $("#asignarCategoria").val(respuesta["NombreCategoria"]);
+      $("#asignarDescripcion").val(respuesta["DescripcionTicket"]);
+      $("#codTicket").val(respuesta["CodTicket"]);
+    }
+  });
+});

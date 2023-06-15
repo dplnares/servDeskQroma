@@ -112,13 +112,6 @@ class ControllerUsuarios
     return $datosUsuario;
   }
 
-  public static function ctrMostrarDatosCompletos($codUsuario)
-  {
-    $tabla = "tba_usuarios";
-    $datosUsuario = ModelUsuarios::mdlMostrarTodosLosDatos($tabla, $codUsuario);
-    return $datosUsuario;
-  }
-
   //  Editar Usuario
   static public function ctrEditarUsuario()
   {
@@ -194,4 +187,11 @@ class ControllerUsuarios
     }
   }
 
+  //  Mostrar los usuarios por perfil
+  public static function ctrMostrarUsuariosPorPerfil($codPerfil)
+  {
+    $tabla = "tba_usuarios";
+    $respuesta = ModelUsuarios::mdlMostrarUsuariosPorPerfil($tabla, $codPerfil);
+    return $respuesta;
+  }
 }
