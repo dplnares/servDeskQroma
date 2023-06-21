@@ -194,4 +194,19 @@ class ControllerUsuarios
     $respuesta = ModelUsuarios::mdlMostrarUsuariosPorPerfil($tabla, $codPerfil);
     return $respuesta;
   }
+
+  //  Editar los datos del perfil del usuario  
+  public static function ctrEditarPerfil($codUsuarioPerfil, $nombreUsuario, $apellidoUsuario, $celularUsuario, $correoUsuario){
+    $tabla = "tba_usuarios";
+    $datosUpdate = array(
+      "CodUsuario" => $codUsuarioPerfil,
+      "NombreUsuario" =>  $nombreUsuario,
+      "ApellidoUsuario" => $apellidoUsuario,
+      "CelularUsuario" => $celularUsuario,
+      "CorreoUsuario" => $correoUsuario,
+      "FechaActualizacion"=>date("Y-m-d"),
+    );
+    $respuesta = ModelUsuarios::mdlUpdateDatosPerfil($tabla, $datosUpdate);
+    return $respuesta;
+  }
 }

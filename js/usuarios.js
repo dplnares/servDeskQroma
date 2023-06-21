@@ -43,3 +43,57 @@ $(".table").on("click", ".btnEliminarUsuario", function () {
     }
   });
 });
+
+//  Alerta para modificar los datos del perfil
+$(".datosPerfil").on("click", ".btnGuardarCambiosPerfil", function () {
+
+
+  swal.fire({
+    title: '¿Está seguro de modificar los datos?',
+    text: "Si no lo está, puede cancelar esta acción",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Si, modificar datos!'
+  }).then((result) => {
+    var codUsuario = $("#codUsuario").val();
+    var nombreUsuario = $("#nombreUsuario").val();
+    var apellidoUsuario = $("#apellidoUsuario").val();
+    var celularUsuario = $("#celularUsuario").val();
+    var correoUsuario = $("#correoUsuario").val();
+
+    var datos = new FormData();
+    datos.append("codUsuarioPerfil", codUsuario);
+    datos.append("nombreUsuario", nombreUsuario);
+    datos.append("apellidoUsuario", apellidoUsuario);
+    datos.append("celularUsuario", celularUsuario);
+    datos.append("correoUsuario", correoUsuario);
+    $.ajax({
+      url: "ajax/usuarios.ajax.php",
+      method: "POST",
+      data: datos,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: "json",
+
+      success: function (respuesta) {
+        if(devolver["respuesta"]=="ok")
+        {
+          swal("Hecho",
+          "¡Datos actualizados correctamente!",
+          "success");
+          location.reload(true);
+        }
+        else
+        {
+          swal("Error",
+          "¡Error al actualizar los datos!",
+          "error");
+        }
+      }
+    });
+  });
+});

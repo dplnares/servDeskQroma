@@ -19,23 +19,23 @@
           <div class="col-md-5 border-right">
             <?php 
               $datosUsuario = ControllerUsuarios::ctrMostrarDatosEditar($_SESSION["codUsuario"]);
-              $nombre = $datosUsuario["NombreUsuario"];
             ?>
-            <div class="p-3 py-5">
+            <div class="p-3 py-5 datosPerfil">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="text-right">Datos Personales</h4>
               </div>
               <div class="row mt-2">
-                <div class="col-md-6"><label class="labels">Nombre</label><input type="text" class="form-control" value="<?php echo $nombre ?>" placeholder="Ingrese su nombre"></div>
-                <div class="col-md-6"><label class="labels">Apellido</label><input type="text" class="form-control" value="<?php echo $nombre ?>" placeholder="Ingrese su apellido"></div>
+                <div class="col-md-6"><label class="labels">Nombres</label><input type="text" class="form-control" id="nombreUsuario" value="<?php echo $datosUsuario['NombreUsuario'] ?>" placeholder="Ingrese su nombre"></div>
+                <div class="col-md-6"><label class="labels">Apellidos</label><input type="text" class="form-control" id="apellidoUsuario" value="<?php echo $datosUsuario['ApellidoUsuario'] ?>" placeholder="Ingrese su apellido"></div>
               </div>
               <div class="row mt-3">
-                <div class="col-md-12"><label class="labels">Celular</label><input type="text" class="form-control" placeholder="Ingrese su número de celular" value="<?php echo $nombre ?>"></div>
-                <div class="col-md-12"><label class="labels">Correo Electrónico</label><input type="text" class="form-control" placeholder="Ingrese su correo electrónico" value="<?php echo $datosUsuario["NombreUsuario"] ?>"></div>
-                <div class="col-md-12"><label class="labels">Area de Trabajo</label><input type="text" class="form-control" placeholder="" value=""></div>
-                <div class="col-md-12"><label class="labels">Sede</label><input type="text" class="form-control" placeholder="" value=""></div>
+                <div class="col-md-12"><label class="labels">Celular</label><input type="text" class="form-control" id="celularUsuario" value="<?php echo $datosUsuario['CelularUsuario'] ?>" placeholder="Ingrese su número de celular" ></div>
+                <div class="col-md-12"><label class="labels">Correo Electrónico</label><input type="text" class="form-control" id="correoUsuario" value="<?php echo $datosUsuario['CorreoUsuario'] ?>" placeholder="Ingrese su correo electrónico" ></div>
+                <div class="col-md-12"><label class="labels">Area de Trabajo</label><input type="text" class="form-control" value="<?php echo $datosUsuario['NombreArea'] ?>" placeholder="Ingrese el área asignada" readonly></div>
+                <div class="col-md-12"><label class="labels">Sede</label><input type="text" class="form-control" value="<?php echo $datosUsuario['NombreSede'] ?>" placeholder="Ingrese su sede asignada" readonly></div>
               </div>
-              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+              <input type="hidden" name="codUsuario" class="codUsuario" id="codUsuario" value="<?php echo $datosUsuario['CodUsuario'] ?>">
+              <div class="mt-5 text-center"><button class="btn btn-primary btnGuardarCambiosPerfil" type="submit">Save Profile</button></div>
             </div>
           </div>
         </div>

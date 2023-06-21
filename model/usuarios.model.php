@@ -76,7 +76,7 @@ class ModelUsuarios
   //  Mostrar los datos a editar de un usuario
   public static function mdlMostrarDatosEditar($tabla, $codUsuario)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_usuarios.CodUsuario, tba_usuarios.NombreUsuario, tba_usuarios.CodArea, tba_usuarios.CorreoUsuario, tba_usuarios.CodPerfil, tba_areausuario.NombreArea, tba_perfilusuario.NombrePerfil FROM $tabla INNER JOIN tba_areausuario ON tba_usuarios.CodArea = tba_areausuario.CodArea INNER JOIN tba_perfilusuario ON tba_usuarios.CodPerfil = tba_perfilusuario.CodPerfil WHERE tba_usuarios.CodUsuario = $codUsuario");
+    $statement = Conexion::conn()->prepare("SELECT tba_usuarios.CodUsuario, tba_usuarios.NombreUsuario, tba_usuarios.ApellidoUsuario, tba_usuarios.CodArea, tba_usuarios.CorreoUsuario, tba_usuarios.CelularUsuario, tba_usuarios.CodPerfil, tba_usuarios.CodSede, tba_areausuario.NombreArea, tba_perfilusuario.NombrePerfil, tba_sede.NombreSede FROM $tabla INNER JOIN tba_areausuario ON tba_usuarios.CodArea = tba_areausuario.CodArea INNER JOIN tba_perfilusuario ON tba_usuarios.CodPerfil = tba_perfilusuario.CodPerfil INNER JOIN tba_sede ON tba_usuarios.CodSede = tba_sede.CodSede WHERE tba_usuarios.CodUsuario = $codUsuario");
     $statement -> execute();
     return $statement -> fetch();
   }
@@ -131,4 +131,23 @@ class ModelUsuarios
     return $statement -> fetchAll();
   }
   
+  //  Update de los datos del perfil del usuario
+  public static function mdlUpdateDatosPerfil($tabla, $datosUpdate)
+  {
+    $statement = Conexion::conn()->prepare("UPDATE $tabla SET NombreUsuario=:NombreUsuario, ApellidoUsuario=:ApellidoUsuario, CelularUsuario=:CelularUsuario, CorreoUsuario=:CorreoUsuario, FechaActualizacion=:FechaActualizacion WHERE CodUsuario=:CodUsuario");
+    $statement -> bindParam(":CodUsuario", $datosUpdate["CodUsuario"], PDO::PARAM_STR);
+    $statement -> bindParam(":NombreUsuario", $datosUpdate["NombreUsuario"], PDO::PARAM_STR);
+    $statement -> bindParam(":ApellidoUsuario", $datosUpdate["ApellidoUsuario"], PDO::PARAM_STR);
+    $statement -> bindParam(":CelularUsuario", $datosUpdate["CelularUsuario"], PDO::PARAM_STR);
+    $statement -> bindParam(":CorreoUsuario", $datosUpdate["CorreoUsuario"], PDO::PARAM_STR);
+    $statement -> bindParam(":FechaActualizacion", $datosUpdate["FechaActualizacion"], PDO::PARAM_STR);
+    if($statement -> execute())
+    {
+      return "ok";
+    }
+    else
+    {
+      return "error";
+    }
+  }
 }
