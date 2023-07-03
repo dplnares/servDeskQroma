@@ -9,15 +9,7 @@
     <div id="layoutSidenav_content">
       <main class="bg">
         <div class="container-fluid px-4">
-          <?php
-          /*  Mostramos todos los tickets a los administradores y a los asistentes, en cambio al usuario regular se le muestran todos.
-          if($_SESSION["CodPerfil"] == 1) {
-            echo'<h1 class="mt-4">Todos los tickets</h1>';
-          } else {
-            echo '<h1 class="mt-4">Todos mis tickets</h1>';
-          }*/
-          ?>
-          <h1 class="mt-4">Todos mis tickets</h1>
+          <h1 class="mt-4">Todos los tickets</h1>
             <div class="d-flex m-2">
               <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalAddTicket">
                 Nuevo Ticket
@@ -37,7 +29,6 @@
                     <th>Título</th>
                     <th>Solicitante</th>
                     <th>Estado</th>
-                    <!-- CONSIDERAR PONER EL AREA SOLO EN EL CASO QUE SEA PARA MOSTRAR A LOS USUARIOS DE TIPO ADMI O AYUDANTES,  ESTE MISMO DEBERÍA ESTAR EN LA TABLA POR SI SE QUIERE <th>Área</th> -->
                     <th>Categoría</th>
                     <th>Fecha de Solicitud</th>
                     <th>Acciones</th>
@@ -56,11 +47,25 @@
                           <td>'.$value["NombreEstado"].'</td>
                           <td>'.$value["NombreCategoria"].'</td>
                           <td>'.$value["FechaCreacion"].'</td>
-                          <td>
-                            <button class="btn btn-warning btnEditarTicket" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalEditTicket">Editar <i class="fa-solid fa-pencil"></i></button>
-                            <button class="btn btn-danger btnEliminarTicket" codTicket="'.$value["CodTicket"].'">Eliminar <i class="fa-solid fa-trash"></i></button>
-                          </td>
-                        </tr>';  
+                          <td>';
+                            if($value["CodEstado"]!=1)
+                            {
+                              echo '
+                                <button class="btn btn-warning btnEditarTicket" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalEditTicket" disabled>Editar <i class="fa-solid fa-pencil"></i></button>
+                                <button class="btn btn-danger btnEliminarTicket" codTicket="'.$value["CodTicket"].'" disabled>Eliminar <i class="fa-solid fa-trash" ></i></button>                                
+                                </td>
+                                </tr>
+                              ';
+                            }
+                            else
+                            {
+                              echo '
+                                <button class="btn btn-warning btnEditarTicket" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalEditTicket" >Editar <i class="fa-solid fa-pencil"></i></button>
+                                <button class="btn btn-danger btnEliminarTicket" codTicket="'.$value["CodTicket"].'">Eliminar <i class="fa-solid fa-trash" ></i></button>
+                                </td>
+                                </tr>
+                              ';
+                            }
                     }
                   ?>
                 </tbody>

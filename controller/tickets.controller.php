@@ -287,4 +287,29 @@ class ControllerTickets
     $respuesta = ModelTickets::mdlUpdateEstado($tabla, $datosUpdate);
     return $respuesta;
   }
+
+
+  //  Mostrar los tickets pendientes por atender
+  static public function ctrMostrarPendientesAsesor($codUsuario)
+  {
+    $tabla = "tba_ticket";
+    $listaTickets = ModelTickets::mdlMostrarPendientesAsesoR($tabla, $codUsuario);
+    return $listaTickets;
+  }
+
+  //  Obtener los datos de la cabecera del ticket
+  static public function ctrObtenerDatosCabecera($codTicket)
+  {
+    $tabla = "tba_ticket";
+    $datosCabecera = ModelTickets::mdlObtenerDatosCabecera($tabla, $codTicket);
+    return $datosCabecera;
+  }
+
+  //  Obtener los datos del detalle del ticket
+  static public function ctrObtenerDatosDetalle($codTicket)
+  {
+    $tabla = "tba_detalleticket";
+    $datosDetalle = ModelTickets::mdlObtenerDatosDetalle($tabla, $codTicket);
+    return $datosDetalle;
+  }
 }

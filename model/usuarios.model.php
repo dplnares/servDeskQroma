@@ -150,4 +150,11 @@ class ModelUsuarios
       return "error";
     }
   }
+
+  public static function mdlMostrarDatosUnUsuario($tabla, $codUsuario)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_usuarios.NombreUsuario, tba_usuarios.ApellidoUsuario, tba_usuarios.CorreoUsuario FROM $tabla WHERE tba_usuarios.Codperfil = $codUsuario");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

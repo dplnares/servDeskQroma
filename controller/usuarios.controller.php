@@ -209,4 +209,12 @@ class ControllerUsuarios
     $respuesta = ModelUsuarios::mdlUpdateDatosPerfil($tabla, $datosUpdate);
     return $respuesta;
   }
+
+  //  Mostrar los datos de un usuario
+  public static function ctrMostrarUnUsuario($codUsuario)
+  {
+    $tabla = "tba_usuarios";
+    $datosUsuario = ModelUsuarios::mdlMostrarDatosUnUsuario($tabla, $codUsuario);
+    return $datosUsuario;
+  }
 }

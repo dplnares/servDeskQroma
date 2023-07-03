@@ -55,7 +55,7 @@ class ModelTickets
   //  Mostrar los tickets de un usuario en específico
   static public function mdlMostrarTicketsUsuarios($tabla, $codUsuario)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.CodEstado, tba_ticket.CodAsignacion, tba_ticket.CodCategoria, tba_ticket.CodUsuario, tba_ticket.TituloTicket, tba_usuarios.NombreUsuario, tba_categoria.NombreCategoria, tba_estado.NombreEstado FROM $tabla INNER JOIN tba_usuarios ON tba_ticket.CodUsuario = tba_usuarios.CodUsuario INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria INNER JOIN tba_estado ON tba_ticket.CodEstado = tba_estado.CodEstado WHERE tba_ticket.CodUsuario = $codUsuario");
+    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.CodEstado, tba_ticket.CodAsignacion, tba_ticket.CodCategoria, tba_ticket.CodUsuario, tba_ticket.TituloTicket, tba_ticket.FechaCreacion, tba_usuarios.NombreUsuario, tba_categoria.NombreCategoria, tba_estado.NombreEstado FROM $tabla INNER JOIN tba_usuarios ON tba_ticket.CodUsuario = tba_usuarios.CodUsuario INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria INNER JOIN tba_estado ON tba_ticket.CodEstado = tba_estado.CodEstado WHERE tba_ticket.CodUsuario = $codUsuario");
     $statement -> execute();
     return $statement -> fetchAll();
   }
@@ -157,5 +157,29 @@ class ModelTickets
     {
       return "error";
     }
+  }
+
+  //  Mostrar los tickets pendientes del asesor
+  public static function mdlMostrarPendientesAsesor($tabla, $codUsuario)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.CodEstado, tba_ticket.CodAsignacion, tba_ticket.CodCategoria, tba_ticket.CodUsuario, tba_ticket.TituloTicket, tba_ticket.FechaCreacion, tba_usuarios.NombreUsuario, tba_categoria.NombreCategoria, tba_estado.NombreEstado FROM $tabla INNER JOIN tba_usuarios ON tba_ticket.CodUsuario = tba_usuarios.CodUsuario INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria INNER JOIN tba_estado ON tba_ticket.CodEstado = tba_estado.CodEstado WHERE tba_ticket.CodAsignacion = $codUsuario AND tba_ticket.CodEstado = 2");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+
+  //  Mostrar los datos de la cabecera
+  public static function mdlObtenerDatosCabecera($tabla, $codTicket)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.TituloTicket, tba_ticket.CodUsuario, tba_ticket.CodCategoria, tba_ticket.CodEstado, tba_ticket.CodAsignacion, tba_ticket.FechaCreacion, tba_categoria.NombreCategoria, tba_estado.NombreEstado FROM $tabla INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria INNER JOIN tba_estado ON tba_ticket.CodEstado = tba_estado.CodEstado WHERE tba_ticket.CodTicket = $codTicket");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
+
+  //  Mostrar los datos del detalle 
+  public static function mdlObtenerDatosDetalle($tabla, $codTicket)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_detalleticket.CodDetalleTicket, tba_detalleticket.CodTicket, tba_detalleticket.DescripcionTicket FROM $tabla WHERE tba_detalleticket.CodTicket = $codTicket");
+    $statement -> execute();
+    return $statement -> fetch();
   }
 }

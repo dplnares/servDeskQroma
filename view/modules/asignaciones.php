@@ -133,8 +133,8 @@ Modal Asignar Ticket
           <button type="submit" class="btn btn-primary">Asignar Ticket</button>
         </div>
         <?php
-          $editarTicket = new ControllerTickets();
-          $editarTicket -> ctrAsignarTicket();
+          $asignarUsuario = new ControllerTickets();
+          $asignarUsuario -> ctrAsignarTicket();
         ?>
       </form>
     </div>

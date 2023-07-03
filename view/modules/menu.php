@@ -17,10 +17,29 @@
   <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
   Tickets
 </a>
-<a class="nav-link" href="asignaciones">
-  <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-  Asignaciones
-</a>
+<?php
+  if($_SESSION["perfilUsuario"]=="1")
+  {
+?>
+  <a class="nav-link" href="asignaciones">
+    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+    Asignaciones
+  </a>
+<?php
+}
+?>
+
+<?php
+  if($_SESSION["perfilUsuario"]=="3")
+  {
+?>
+  <a class="nav-link" href="pendientes">
+    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+    Pendientes
+  </a>
+<?php
+}
+?>
 <!-- <div class="sb-sidenav-menu-heading">Tickets</div>
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
   <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
