@@ -34,6 +34,7 @@ session_start();
           $_GET["ruta"] == "asignaciones" ||
           $_GET["ruta"] == "pendientes" ||
           $_GET["ruta"] == "atenderpendiente" ||
+          $_GET["ruta"] == "revisiones" ||
           $_GET["ruta"] == "signout" 
         )
         {

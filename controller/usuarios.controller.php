@@ -65,6 +65,7 @@ class ControllerUsuarios
         "PasswordUsuario" => $passwordCrypt,
         "CodPerfil" => $_POST["perfilUsuario"],
         "CodArea" => $_POST["areaUsuario"],
+        "CodSede" => 3,
         "FechaCreacion"=>date("Y-m-d"),
         "FechaActualizacion"=>date("Y-m-d"),
       );

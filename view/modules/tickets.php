@@ -191,7 +191,7 @@ Modal Editar Ticket
           </div>
         </div>
         <div class="modal-footer">
-        <input type="hidden" id="codTicket" name="codTicket" class="codTicket">
+          <input type="hidden" id="codTicket" name="codTicket" class="codTicket">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           <button type="submit" class="btn btn-primary">Editar Ticket</button>
         </div>

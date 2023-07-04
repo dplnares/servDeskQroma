@@ -28,7 +28,7 @@ class ModelTickets
     //  Ingresar Detalle del detalle
   static public function mdlIngresarDetalleTicket($tabla, $datosDetalle)
   {
-    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (CodTicket, DescripcionTicket) VALUES(:CodTicket, :DescripcionTicket)");
+    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (CodTicket, DescripcionTicket, FechaCreacion, FechaActualizacion) VALUES(:CodTicket, :DescripcionTicket, :FechaCreacion, :FechaActualizacion)");
     $statement -> bindParam(":CodTicket", $datosDetalle["CodTicket"], PDO::PARAM_STR);
     $statement -> bindParam(":DescripcionTicket", $datosDetalle["DescripcionTicket"], PDO::PARAM_STR);
     $statement -> bindParam(":FechaCreacion", $datosDetalle["FechaCreacion"], PDO::PARAM_STR);
@@ -163,6 +163,14 @@ class ModelTickets
   public static function mdlMostrarPendientesAsesor($tabla, $codUsuario)
   {
     $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.CodEstado, tba_ticket.CodAsignacion, tba_ticket.CodCategoria, tba_ticket.CodUsuario, tba_ticket.TituloTicket, tba_ticket.FechaCreacion, tba_usuarios.NombreUsuario, tba_categoria.NombreCategoria, tba_estado.NombreEstado FROM $tabla INNER JOIN tba_usuarios ON tba_ticket.CodUsuario = tba_usuarios.CodUsuario INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria INNER JOIN tba_estado ON tba_ticket.CodEstado = tba_estado.CodEstado WHERE tba_ticket.CodAsignacion = $codUsuario AND tba_ticket.CodEstado = 2");
+    $statement -> execute();
+    return $statement -> fetchAll();
+  }
+
+  //  Mostrar los tickets atendidos
+  public static function mdlMostrarTicketsAtendidos($tabla, $codUsuario)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodTicket, tba_ticket.CodEstado, tba_ticket.CodAsignacion, tba_ticket.CodCategoria, tba_ticket.CodUsuario, tba_ticket.TituloTicket, tba_ticket.FechaCreacion, tba_usuarios.NombreUsuario, tba_categoria.NombreCategoria, tba_estado.NombreEstado FROM $tabla INNER JOIN tba_usuarios ON tba_ticket.CodUsuario = tba_usuarios.CodUsuario INNER JOIN tba_categoria ON tba_ticket.CodCategoria = tba_categoria.CodCategoria INNER JOIN tba_estado ON tba_ticket.CodEstado = tba_estado.CodEstado WHERE tba_ticket.CodAsignacion = $codUsuario AND tba_ticket.CodEstado = 3");
     $statement -> execute();
     return $statement -> fetchAll();
   }

@@ -54,12 +54,13 @@ class ModelUsuarios
   //  Ingresar un nuevo usuario
   static public function mdlIngresarUsuario($tabla, $datosCreate)
   {
-    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (NombreUsuario, CorreoUsuario, PasswordUsuario, CodPerfil, CodArea, FechaCreacion, FechaActualizacion) VALUES(:NombreUsuario, :CorreoUsuario, :PasswordUsuario, :CodPerfil, :CodArea, :FechaCreacion, :FechaActualizacion)");
+    $statement = Conexion::conn()->prepare("INSERT INTO $tabla (NombreUsuario, CorreoUsuario, PasswordUsuario, CodPerfil, CodArea, CodSede, FechaCreacion, FechaActualizacion) VALUES(:NombreUsuario, :CorreoUsuario, :PasswordUsuario, :CodPerfil, :CodArea, :CodSede, :FechaCreacion, :FechaActualizacion)");
     $statement -> bindParam(":NombreUsuario", $datosCreate["NombreUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":CorreoUsuario", $datosCreate["CorreoUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":PasswordUsuario", $datosCreate["PasswordUsuario"], PDO::PARAM_STR);
     $statement -> bindParam(":CodPerfil", $datosCreate["CodPerfil"], PDO::PARAM_STR);
     $statement -> bindParam(":CodArea", $datosCreate["CodArea"], PDO::PARAM_STR);
+    $statement -> bindParam(":CodSede", $datosCreate["CodSede"], PDO::PARAM_STR);
     $statement -> bindParam(":FechaCreacion", $datosCreate["FechaCreacion"], PDO::PARAM_STR);
     $statement -> bindParam(":FechaActualizacion", $datosCreate["FechaActualizacion"], PDO::PARAM_STR);
 
@@ -153,7 +154,7 @@ class ModelUsuarios
 
   public static function mdlMostrarDatosUnUsuario($tabla, $codUsuario)
   {
-    $statement = Conexion::conn()->prepare("SELECT tba_usuarios.NombreUsuario, tba_usuarios.ApellidoUsuario, tba_usuarios.CorreoUsuario FROM $tabla WHERE tba_usuarios.Codperfil = $codUsuario");
+    $statement = Conexion::conn()->prepare("SELECT tba_usuarios.NombreUsuario, tba_usuarios.ApellidoUsuario, tba_usuarios.CorreoUsuario FROM $tabla WHERE tba_usuarios.CodUsuario = $codUsuario");
     $statement -> execute();
     return $statement -> fetch();
   }

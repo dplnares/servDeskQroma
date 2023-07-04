@@ -41,7 +41,7 @@ class ControllerTickets
               text: "¡Ticket registrado Correctamente!",
               }).then(function(result){
                 if(result.value){
-                  window.location = "usuarios";
+                  window.location = "tickets";
                 }
               });
             </script>';
@@ -85,7 +85,7 @@ class ControllerTickets
   {
     $tabla = "tba_ticket";
     //  Perfil Solicitante, solo le muestra sus tickets creados por el, por otro lado muestra todos
-    if ($perfilUsuario == "2")
+    if ($perfilUsuario == "2" || $perfilUsuario == "3")
     {
       $listaTickets = ModelTickets::mdlMostrarTicketsUsuarios($tabla, $codUsuario);
     }
@@ -293,7 +293,15 @@ class ControllerTickets
   static public function ctrMostrarPendientesAsesor($codUsuario)
   {
     $tabla = "tba_ticket";
-    $listaTickets = ModelTickets::mdlMostrarPendientesAsesoR($tabla, $codUsuario);
+    $listaTickets = ModelTickets::mdlMostrarPendientesAsesor($tabla, $codUsuario);
+    return $listaTickets;
+  }
+
+  //  Mostrar los tickets que fueron revisados
+  static public function ctrMostrarRevisiones($codUsuario)
+  {
+    $tabla = "tba_ticket";
+    $listaTickets = ModelTickets::mdlMostrarTicketsAtendidos($tabla, $codUsuario);
     return $listaTickets;
   }
 
