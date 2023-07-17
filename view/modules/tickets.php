@@ -52,6 +52,7 @@
                             {
                               echo '
                                 <button class="btn btn-warning btnEditarTicket" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalEditTicket" disabled>Editar <i class="fa-solid fa-pencil"></i></button>
+                                <button class="btn btn-success btnVisualizarConsulta" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalVisualizarTicket" disabled>Visualizar <i class="fa fa-eye"></i></button>
                                 <button class="btn btn-danger btnEliminarTicket" codTicket="'.$value["CodTicket"].'" disabled>Eliminar <i class="fa-solid fa-trash" ></i></button>                                
                                 </td>
                                 </tr>
@@ -61,6 +62,7 @@
                             {
                               echo '
                                 <button class="btn btn-warning btnEditarTicket" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalEditTicket" >Editar <i class="fa-solid fa-pencil"></i></button>
+                                <button class="btn btn-success btnVisualizarConsulta" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalVisualizarTicket" >Visualizar <i class="fa fa-eye"></i></button>
                                 <button class="btn btn-danger btnEliminarTicket" codTicket="'.$value["CodTicket"].'">Eliminar <i class="fa-solid fa-trash" ></i></button>
                                 </td>
                                 </tr>
@@ -203,6 +205,74 @@ Modal Editar Ticket
     </div>
   </div>
 </div>
+
+<!--=====================================
+Modal Visualizar Ticket
+======================================-->
+<div class="modal fade" id="modalVisualizarTicket" tabindex="-1" aria-labelledby="modalVisualizarTicket" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Visualizar Ticket</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form role="form" method="post">
+        <div class="modal-body">
+          <div class="box-body">
+
+            <!-- Titulo -->
+            <div class="form-group">
+              <label for="tituloTicket" class="col-form-label">Titulo:</label>
+              <input type="text" class="form-control" id="tituloTicket" name="tituloTicket">
+            </div>
+
+            <!-- Nombre Solicitante -->
+            <div class="form-group">
+              <label for="solicitanteTicket" class="col-form-label">Nombre Solicitante:</label>
+              <?php
+                $NombreUsuario = $_SESSION["nombreUsuario"];
+                echo '<input type="text" class="form-control" id="solicitanteTicket" name="solicitanteTicket" value='.$NombreUsuario.' readonly>';
+              ?>
+            </div>
+
+            <!-- Categoria -->
+            <div class="form-group">
+            <label for="categoriaTicket" class="col-form-label">Perfil:</label>
+              <select class="form-control" name="categoriaTicket">
+              <?php
+                $categorias = ControllerCategorias::ctrMostrarCategorias();
+                foreach ($categorias as $key => $value)
+                {
+                  echo '<option value="'.$value["CodCategoria"].'">'.$value["NombreCategoria"].'</option>';
+                }
+              ?>
+              </select>
+            </div>
+
+            <!-- Descripción -->
+            <div class="form-group">
+              <label for="descripcionTicket" class="col-form-label">Descripción:</label>
+              <input type="text" class="form-control" id="descripcionTicket" name="descripcionTicket">
+            </div>
+
+            <!-- Respuesta -->
+            <div class="form-group">
+              <label for="descripcionTicket" class="col-form-label">Respuesta:</label>
+              <input type="text" class="form-control" id="descripcionTicket" name="descripcionTicket">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Generar Ticket</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <?php
   $eliminarTicket = new ControllerTickets();

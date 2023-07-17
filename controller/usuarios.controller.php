@@ -5,7 +5,7 @@ class ControllerUsuarios
   //  Verificar los valores para iniciar sesión  
   static public function ctrIniciarSesion()
   {
-    if (isset($_POST["inputEmail"]))
+    if (isset($_POST["inputEmail"]) && $_POST["inputEmail"] != "" && $_POST["inputEmail"] != null && $_POST["inputPassword"] != "" && $_POST["inputPassword"] != null)
     {
       $passwordCrypt = crypt($_POST["inputPassword"], '$2a$07$usesomesillystringfore2uDLvp1Ii2e./U9C8sBjqp8I90dH6hi');
       $email = $_POST["inputEmail"];
@@ -19,7 +19,7 @@ class ControllerUsuarios
         $_SESSION["login"] = "ok";
         $_SESSION["emailUsuario"] = $datosUsuario["CorreoUsuario"];
         $_SESSION["perfilUsuario"] = $datosUsuario["CodPerfil"];
-        $_SESSION["areaUsuario"] = $datosUsuario["AreaUsuario"];
+        $_SESSION["areaUsuario"] = $datosUsuario["CodArea"];
         $_SESSION["nombreUsuario"] = $datosUsuario["NombreUsuario"];
         $_SESSION["codUsuario"] = $datosUsuario["CodUsuario"];
         

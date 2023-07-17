@@ -33,6 +33,10 @@ class ControllerTickets
         $respuestaDetalle = ModelTickets::mdlIngresarDetalleTicket($tablaDetalle, $datosDetalle);
         if ($respuestaDetalle == "ok")
         {
+          //  Si se registra el detalle, se tiene que enviar un correo de confirmación
+          $correo = $_SESSION["emailUsuario"];
+          ControllerCorreos::ctrEnviarCorreoRegistro($correo);
+          
           echo '
             <script>
             Swal.fire({
@@ -285,6 +289,11 @@ class ControllerTickets
       "FechaActualizacion"=>date("Y-m-d"),
     );
     $respuesta = ModelTickets::mdlUpdateEstado($tabla, $datosUpdate);
+    //  Si se cambia el estado correctamente, notificar el estado al correo del solicitante
+    if($respuesta == "ok")
+    {
+      
+    }
     return $respuesta;
   }
 
