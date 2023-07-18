@@ -111,7 +111,7 @@ Modal Responder Ticket
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Generar Ticket</button>
+          <button type="submit" class="btn btn-primary">Generar Respuesta</button>
         </div>
         <?php
           $crearRespuesta = new ControllerPendientes();

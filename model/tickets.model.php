@@ -190,4 +190,12 @@ class ModelTickets
     $statement -> execute();
     return $statement -> fetch();
   }
+
+  //  Obtener los datos del usuario que registró el ticket
+  public static function mdlObtenerCorreoUsuario($tabla, $codTicket)
+  {
+    $statement = Conexion::conn()->prepare("SELECT tba_ticket.CodUsuario, tba_usuarios.CorreoUsuario FROM $tabla INNER JOIN tba_usuarios ON tba_ticket.CodUsuario = tba_usuarios.CodUsuario WHERE tba_ticket.CodTicket = $codTicket");
+    $statement -> execute();
+    return $statement -> fetch();
+  }
 }

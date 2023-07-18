@@ -52,7 +52,7 @@
                             {
                               echo '
                                 <button class="btn btn-warning btnEditarTicket" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalEditTicket" disabled>Editar <i class="fa-solid fa-pencil"></i></button>
-                                <button class="btn btn-success btnVisualizarConsulta" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalVisualizarTicket" disabled>Visualizar <i class="fa fa-eye"></i></button>
+                                
                                 <button class="btn btn-danger btnEliminarTicket" codTicket="'.$value["CodTicket"].'" disabled>Eliminar <i class="fa-solid fa-trash" ></i></button>                                
                                 </td>
                                 </tr>
@@ -62,7 +62,7 @@
                             {
                               echo '
                                 <button class="btn btn-warning btnEditarTicket" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalEditTicket" >Editar <i class="fa-solid fa-pencil"></i></button>
-                                <button class="btn btn-success btnVisualizarConsulta" codTicket="'.$value["CodTicket"].'" data-bs-toggle="modal" data-bs-target="#modalVisualizarTicket" >Visualizar <i class="fa fa-eye"></i></button>
+                                
                                 <button class="btn btn-danger btnEliminarTicket" codTicket="'.$value["CodTicket"].'">Eliminar <i class="fa-solid fa-trash" ></i></button>
                                 </td>
                                 </tr>

@@ -19,6 +19,11 @@ class ControllerPendientes
       );
 
       $respuestaAtencion = ModelPendientes::mdlAgregarNuevaRespuesta($tablaAtenciones, $datosCreate);
+
+      //  Envía el correo con la respuesta del ticket
+      $correoUsuario = ControllerTickets::ctrObtenerUsuarioTicket($_GET["codTicket"]);
+      ControllerCorreos::ctrEnviarCorreoAtencion($correoUsuario["CorreoUsuario"], $_POST["descripcionRespuesta"]);
+
       if($respuestaAtencion == "ok")
       {
         $cambiarEstado = ControllerTickets::ctrCambiarEstado($_GET["codTicket"], 3);

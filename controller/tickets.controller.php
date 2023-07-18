@@ -329,4 +329,12 @@ class ControllerTickets
     $datosDetalle = ModelTickets::mdlObtenerDatosDetalle($tabla, $codTicket);
     return $datosDetalle;
   }
+
+  //  Obtener el correo del usuario que registró el ticket
+  static public function ctrObtenerUsuarioTicket($codTicket)
+  {
+    $tabla = "tba_ticket";
+    $respuesta = ModelTickets::mdlObtenerCorreoUsuario($tabla, $codTicket);
+    return $respuesta;
+  }
 }
