@@ -53,8 +53,8 @@ class ControllerCorreos
       $mail->isSMTP();
       $mail->Host       = 'smtp.gmail.com';
       $mail->SMTPAuth   = true;
-      $mail->Username   = 'dpoblette258@gmail.com';
-      $mail->Password   = 'eanewnkcpscqibch';
+      $mail->Username   = '';
+      $mail->Password   = '';
       $mail->SMTPSecure = 'ssl';
       $mail->Port       = 465;
 
